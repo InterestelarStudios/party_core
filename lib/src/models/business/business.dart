@@ -14,6 +14,7 @@ class Business {
   String? name;
   String? type;
   List? images;
+  List? categories;
   Timestamp? created;
   LegalData? legalData;
   String? logo;
@@ -27,6 +28,7 @@ class Business {
     this.name,
     this.type,
     this.images,
+    this.categories,
     this.created,
     this.legalData,
     this.logo,
@@ -43,6 +45,7 @@ class Business {
       'name': name,
       'type': type,
       'images': images,
+      'categories':categories,
       'created': created,
       'legalData': legalData?.toMap(),
       'logo': logo,
@@ -60,6 +63,7 @@ class Business {
       name: map['name'] != null ? map['name'] as String : null,
       type: map['type'] != null ? map['type'] as String : null,
       images: map['images'] != null ? map['images'] as List : null,
+      categories: map['categories'] != null ? map['categories'] as List : null,
       created: map['created'] != null ? map['created'] as Timestamp : null,
       legalData: map['legalData'] != null ? LegalData.fromMap(map['legalData'] as Map<String,dynamic>) : null,
       logo: map['logo'] != null ? map['logo'] as String : null,
