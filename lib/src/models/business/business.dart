@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:interestelar_party/src/models/business/legal_data.dart';
-import 'package:interestelar_party/src/models/general/address.dart';
+import 'package:interestelar_party/src/models/general/location.dart';
 import 'package:interestelar_party/src/models/general/user_details.dart';
 
 class Business {
@@ -19,9 +19,9 @@ class Business {
   LegalData? legalData;
   String? logo;
   String? about;
-  Address? address;
   UserDetails? creator;
-  GeoPoint? geoPoint;
+  Location? location;
+
   Business({
     this.active,
     this.id,
@@ -33,9 +33,8 @@ class Business {
     this.legalData,
     this.logo,
     this.about,
-    this.address,
     this.creator,
-    this.geoPoint,
+    this.location
   });
 
   Map<String, dynamic> toMap() {
@@ -50,9 +49,8 @@ class Business {
       'legalData': legalData?.toMap(),
       'logo': logo,
       'about': about,
-      'address': address?.toMap(),
       'creator': creator?.toMap(),
-      'geoPoint': geoPoint,
+      'location': location?.toMap(),
     };
   }
 
@@ -68,9 +66,8 @@ class Business {
       legalData: map['legalData'] != null ? LegalData.fromMap(map['legalData'] as Map<String,dynamic>) : null,
       logo: map['logo'] != null ? map['logo'] as String : null,
       about: map['about'] != null ? map['about'] as String : null,
-      address: map['address'] != null ? Address.fromMap(map['address'] as Map<String,dynamic>) : null,
       creator: map['creator'] != null ? UserDetails.fromMap(map['creator'] as Map<String,dynamic>) : null,
-      geoPoint: map['geoPoint'] != null ? map['geoPoint'] as GeoPoint : null,
+      location: map['location'] != null ? Location.fromMap(map['location'] as Map<String,dynamic>) : null,
     );
   }
 
