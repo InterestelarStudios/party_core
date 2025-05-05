@@ -5,7 +5,7 @@ class UserDetails {
   String id;
   String username;
   String email;
-  String image;
+  String? image;
 
   UserDetails({
     required this.id,
@@ -29,7 +29,7 @@ class UserDetails {
       id: map['id'] as String,
       username: map['username'] as String,
       email: map['email'] as String,
-      image: map['image'] as String,
+      image: map['image'] != null ? map['image'] as String : null,
     );
   }
 
