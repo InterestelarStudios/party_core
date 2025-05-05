@@ -21,6 +21,7 @@ class Business {
   String? about;
   UserDetails? creator;
   Location? location;
+  bool? verified;
 
   Business({
     this.active,
@@ -34,7 +35,8 @@ class Business {
     this.logo,
     this.about,
     this.creator,
-    this.location
+    this.location,
+    this.verified,
   });
 
   Map<String, dynamic> toMap() {
@@ -51,6 +53,7 @@ class Business {
       'about': about,
       'creator': creator?.toMap(),
       'location': location?.toMap(),
+      'verified': verified,
     };
   }
 
@@ -68,6 +71,7 @@ class Business {
       about: map['about'] != null ? map['about'] as String : null,
       creator: map['creator'] != null ? UserDetails.fromMap(map['creator'] as Map<String,dynamic>) : null,
       location: map['location'] != null ? Location.fromMap(map['location'] as Map<String,dynamic>) : null,
+      verified: map['verified'] != null ? map['verified'] as bool : null,
     );
   }
 
