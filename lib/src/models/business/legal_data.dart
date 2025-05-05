@@ -127,18 +127,19 @@ class Address {
   String? street;
   String? district;
   String? number;
+  String? city;
   String? state;
   String? complement;
-
+  
   Address({
     this.cep,
     this.street,
     this.district,
     this.number,
+    this.city,
     this.state,
     this.complement,
   });
-
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -146,6 +147,7 @@ class Address {
       'street': street,
       'district': district,
       'number': number,
+      'city': city,
       'state': state,
       'complement': complement,
     };
@@ -157,6 +159,7 @@ class Address {
       street: map['street'] != null ? map['street'] as String : null,
       district: map['district'] != null ? map['district'] as String : null,
       number: map['number'] != null ? map['number'] as String : null,
+      city: map['city'] != null ? map['city'] as String : null,
       state: map['state'] != null ? map['state'] as String : null,
       complement: map['complement'] != null ? map['complement'] as String : null,
     );
