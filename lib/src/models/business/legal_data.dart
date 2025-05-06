@@ -9,6 +9,7 @@ class LegalData {
   BusinessDocument? cnpjDoc;
   BusinessDocument? certificateDoc;
   BusinessDocument? personalDoc;
+  BusinessDocument? faceDoc;
   
   LegalData({
     this.businessName,
@@ -17,8 +18,8 @@ class LegalData {
     this.cnpjDoc,
     this.certificateDoc,
     this.personalDoc,
+    this.faceDoc,
   });
-  
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -28,6 +29,7 @@ class LegalData {
       'cnpjDoc': cnpjDoc?.toMap(),
       'certificateDoc': certificateDoc?.toMap(),
       'personalDoc': personalDoc?.toMap(),
+      'faceDoc': faceDoc?.toMap(),
     };
   }
 
@@ -39,6 +41,7 @@ class LegalData {
       cnpjDoc: map['cnpjDoc'] != null ? BusinessDocument.fromMap(map['cnpjDoc'] as Map<String,dynamic>) : null,
       certificateDoc: map['certificateDoc'] != null ? BusinessDocument.fromMap(map['certificateDoc'] as Map<String,dynamic>) : null,
       personalDoc: map['personalDoc'] != null ? BusinessDocument.fromMap(map['personalDoc'] as Map<String,dynamic>) : null,
+      faceDoc: map['faceDoc'] != null ? BusinessDocument.fromMap(map['faceDoc'] as Map<String,dynamic>) : null,
     );
   }
 
@@ -130,7 +133,7 @@ class Address {
   String? city;
   String? state;
   String? complement;
-  
+
   Address({
     this.cep,
     this.street,
