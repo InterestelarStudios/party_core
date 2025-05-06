@@ -33,8 +33,7 @@ class UploadFirestoreStorage{
     String url = '';
     FirebaseStorage storage = FirebaseStorage.instance;
     Reference pastaRaiz = storage.ref();
-    Reference arquivo = pastaRaiz.child('anexos')
-    .child("$path/${file.path.split('/').last}");
+    Reference arquivo = pastaRaiz.child("$path/${file.path.split('/').last}");
     UploadTask task = arquivo.putFile(File(file.path));
     await task.then((p0) async {
      url = await p0.ref.getDownloadURL();
