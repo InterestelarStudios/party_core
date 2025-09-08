@@ -1,36 +1,30 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:interestelar_party/interestelar_party.dart';
 
 class Product {
-  String? id;
-  String? title;
+  String id;
+  String title;
   String? description;
-  num? price;
-  String? category;
+  num price;
+  String category;
   String? image;
-  bool? active;
-  Timestamp? created;
-  int? quantity;
-  String? businessId;
-  Map? businessDetails;
-  List? sales;
-  List? avaliations;
-  List? variantes;
-
+  bool active;
+  Timestamp created;
+  BusinessDetails business;
+  List<ProductVariant> variantes;
   Product({
-    this.id,
-    this.title,
+    required this.id,
+    required this.title,
     this.description,
-    this.price,
-    this.category,
+    required this.price,
+    required this.category,
     this.image,
-    this.created,
-    this.active,
-    this.quantity,
-    this.businessId,
-    this.businessDetails,
-    this.sales,
-    this.avaliations,
-    this.variantes,
+    required this.active,
+    required this.created,
+    required this.business,
+    required this.variantes,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,52 +35,29 @@ class Product {
       'price': price,
       'category': category,
       'image': image,
-      'created': created,
       'active': active,
-      'quantity': quantity,
-      'businessId': businessId,
-      'businessDetails': businessDetails,
-      'sales': sales,
-      'avaliations': avaliations,
-      'variantes': variantes,
+      'created': created,
+      'business': business.toMap(),
+      'variantes': variantes.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory Product.fromMap(DocumentSnapshot map) {
+  factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      id: map['id'] != null ? map['id'] as String : null,
-      title: map['title'] != null ? map['title'] as String : null,
+      id: map['id'] as String,
+      title: map['title'] as String,
       description: map['description'] != null ? map['description'] as String : null,
-      price: map['price'] != null ? map['price'] as num : null,
-      category: map['category'] != null ? map['category'] as String : null,
+      price: map['price'] as num,
+      category: map['category'] as String,
       image: map['image'] != null ? map['image'] as String : null,
-      active: map['active'] != null ? map['active'] as bool : null,
-      quantity: 0,
-      created: map['created'] != null ? map['created'] as Timestamp : null,
-      businessId: map['businessId'] != null ? map['businessId'] as String : null,
-      businessDetails: map['businessDetails'] != null ? map['businessDetails'] as Map : null,
-      sales: map['sales'] != null ? map['sales'] as List : null,
-      avaliations: map['avaliations'] != null ? map['avaliations'] as List : null,
-      variantes: map['variantes'] != null ? map['variantes'] as List : null,
+      active: map['active'] as bool,
+      created: map['created'] as Timestamp,
+      business: BusinessDetails.fromMap(map['business'] as Map<String,dynamic>),
+      variantes: List<ProductVariant>.from((map['variantes'] as List<int>).map<ProductVariant>((x) => ProductVariant.fromMap(x as Map<String,dynamic>),),),
     );
   }
 
-  factory Product.fromMapNative(Map map) {
-    return Product(
-      id: map['id'] != null ? map['id'] as String : null,
-      title: map['title'] != null ? map['title'] as String : null,
-      description: map['description'] != null ? map['description'] as String : null,
-      price: map['price'] != null ? map['price'] as num : null,
-      category: map['category'] != null ? map['category'] as String : null,
-      image: map['image'] != null ? map['image'] as String : null,
-      active: map['active'] != null ? map['active'] as bool : null,
-      quantity: map['quantity'] != null ? map['quantity'] as int : null,
-      created: map['created'] != null ? map['created'] as Timestamp : null,
-      businessId: map['businessId'] != null ? map['businessId'] as String : null,
-      businessDetails: map['businessDetails'] != null ? map['businessDetails'] as Map : null,
-      sales: map['sales'] != null ? map['sales'] as List : null,
-      avaliations: map['avaliations'] != null ? map['avaliations'] as List : null,
-      variantes: map['variantes'] != null ? map['variantes'] as List : null,
-    );
-  }
+  String toJson() => json.encode(toMap());
+
+  factory Product.fromJson(String source) => Product.fromMap(json.decode(source) as Map<String, dynamic>);
 }

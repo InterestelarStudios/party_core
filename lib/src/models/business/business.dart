@@ -129,3 +129,40 @@ class BusinessResource {
 
   factory BusinessResource.fromJson(String source) => BusinessResource.fromMap(json.decode(source) as Map<String, dynamic>);
 }
+
+class BusinessDetails {
+
+  String id;
+  String logo;
+  String name;
+  String category;
+  BusinessDetails({
+    required this.id,
+    required this.logo,
+    required this.name,
+    required this.category,
+  });
+
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'logo': logo,
+      'name': name,
+      'category': category,
+    };
+  }
+
+  factory BusinessDetails.fromMap(Map<String, dynamic> map) {
+    return BusinessDetails(
+      id: map['id'] as String,
+      logo: map['logo'] as String,
+      name: map['name'] as String,
+      category: map['category'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory BusinessDetails.fromJson(String source) => BusinessDetails.fromMap(json.decode(source) as Map<String, dynamic>);
+}
