@@ -58,7 +58,7 @@ class Product {
       active: map['active'] as bool,
       created: map['created'] as Timestamp,
       business: BusinessDetails.fromMap(map['business'] as Map<String,dynamic>),
-      variants: List<ProductVariant>.from((map['variants'] as List<int>).map<ProductVariant>((x) => ProductVariant.fromMap(x as Map<String,dynamic>),),)
+      variants: map['variants'] == null ? [] : map['variants'].map<ProductVariant>((e)=> ProductVariant.fromMap(e)).toList(),
     );
   }
 
