@@ -12,7 +12,7 @@ class Business {
   bool? active;
   String? id;
   String? name;
-  String? type;
+  String? type;  //stablishment - eventMenager
   List? images;
   List? categories;
   Timestamp? created;
@@ -23,6 +23,7 @@ class Business {
   Location? location;
   bool? verified;
   List? productsCategories;
+  BusinessResource? businessResource;
 
   Business({
     this.active,
@@ -39,6 +40,7 @@ class Business {
     this.location,
     this.verified,
     this.productsCategories,
+    this.businessResource,
   });
 
   Map<String, dynamic> toMap() {
@@ -57,6 +59,7 @@ class Business {
       'location': location?.toMap(),
       'verified': verified,
       'productsCategories': productsCategories,
+      'businessResource' : businessResource,
     };
   }
 
@@ -76,10 +79,53 @@ class Business {
       location: map['location'] != null ? Location.fromMap(map['location'] as Map<String,dynamic>) : null,
       verified: map['verified'] != null ? map['verified'] as bool : null,
       productsCategories: map['productsCategories'] != null ? map['productsCategories'] as List : null,
+      businessResource: map['businessResource'] != null ? BusinessResource.fromMap(map['businessResource'] as Map<String,dynamic>) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory Business.fromJson(String source) => Business.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+
+class BusinessResource {
+ 
+  String operationalType; // demand - order
+  bool orders;
+  bool events;
+  bool delivery;
+  bool tables;
+
+  BusinessResource({
+    required this.operationalType,
+    required this.orders,
+    required this.events,
+    required this.delivery,
+    required this.tables,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'operationalType': operationalType,
+      'orders': orders,
+      'events': events,
+      'delivery': delivery,
+      'tables': tables,
+    };
+  }
+
+  factory BusinessResource.fromMap(Map<String, dynamic> map) {
+    return BusinessResource(
+      operationalType: map['operationalType'] as String,
+      orders: map['orders'] as bool,
+      events: map['events'] as bool,
+      delivery: map['delivery'] as bool,
+      tables: map['tables'] as bool,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory BusinessResource.fromJson(String source) => BusinessResource.fromMap(json.decode(source) as Map<String, dynamic>);
 }
