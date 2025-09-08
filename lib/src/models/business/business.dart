@@ -84,7 +84,7 @@ class Business {
       verified: map['verified'] != null ? map['verified'] as bool : null,
       productsCategories: map['productsCategories'] != null ? map['productsCategories'] as List : null,
       businessResource: map['businessResource'] != null ? BusinessResource.fromMap(map['businessResource'] as Map<String,dynamic>) : null,
-      variants: List<ProductVariant>.from((map['variants'] as List<int>).map<ProductVariant>((x) => ProductVariant.fromMap(x as Map<String,dynamic>),),)
+      variants: map['variants'] == null ? [] : map['variants'].map<ProductVariant>((e)=> ProductVariant.fromMap(e)).toList(),
     );
   }
 
@@ -136,7 +136,7 @@ class BusinessResource {
 }
 
 class BusinessDetails {
-
+ 
   String id;
   String logo;
   String name;
