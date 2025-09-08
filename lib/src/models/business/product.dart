@@ -1,9 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:interestelar_party/interestelar_party.dart';
 
 class Product {
+
   String id;
   String title;
   String? description;
@@ -13,7 +16,7 @@ class Product {
   bool active;
   Timestamp created;
   BusinessDetails business;
-  List<ProductVariant> variantes;
+
   Product({
     required this.id,
     required this.title,
@@ -24,8 +27,8 @@ class Product {
     required this.active,
     required this.created,
     required this.business,
-    required this.variantes,
   });
+  
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -38,7 +41,6 @@ class Product {
       'active': active,
       'created': created,
       'business': business.toMap(),
-      'variantes': variantes.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -53,7 +55,6 @@ class Product {
       active: map['active'] as bool,
       created: map['created'] as Timestamp,
       business: BusinessDetails.fromMap(map['business'] as Map<String,dynamic>),
-      variantes: List<ProductVariant>.from((map['variantes'] as List<int>).map<ProductVariant>((x) => ProductVariant.fromMap(x as Map<String,dynamic>),),),
     );
   }
 

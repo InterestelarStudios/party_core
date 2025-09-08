@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:interestelar_party/interestelar_party.dart';
 
 import 'package:interestelar_party/src/models/business/legal_data.dart';
 import 'package:interestelar_party/src/models/general/location.dart';
@@ -24,6 +25,7 @@ class Business {
   bool? verified;
   List? productsCategories;
   BusinessResource? businessResource;
+  List<ProductVariant>? variants;
 
   Business({
     this.active,
@@ -41,6 +43,7 @@ class Business {
     this.verified,
     this.productsCategories,
     this.businessResource,
+    this.variants,
   });
 
   Map<String, dynamic> toMap() {
@@ -60,6 +63,7 @@ class Business {
       'verified': verified,
       'productsCategories': productsCategories,
       'businessResource' : businessResource,
+      'variants': variants!.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -80,6 +84,7 @@ class Business {
       verified: map['verified'] != null ? map['verified'] as bool : null,
       productsCategories: map['productsCategories'] != null ? map['productsCategories'] as List : null,
       businessResource: map['businessResource'] != null ? BusinessResource.fromMap(map['businessResource'] as Map<String,dynamic>) : null,
+      variants: List<ProductVariant>.from((map['variants'] as List<int>).map<ProductVariant>((x) => ProductVariant.fromMap(x as Map<String,dynamic>),),)
     );
   }
 
