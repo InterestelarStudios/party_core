@@ -16,6 +16,7 @@ class Product {
   bool active;
   Timestamp created;
   BusinessDetails business;
+  List<ProductVariant>? variants;
 
   Product({
     required this.id,
@@ -27,6 +28,7 @@ class Product {
     required this.active,
     required this.created,
     required this.business,
+    this.variants,
   });
   
 
@@ -41,6 +43,7 @@ class Product {
       'active': active,
       'created': created,
       'business': business.toMap(),
+      'variants': variants!.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -55,6 +58,7 @@ class Product {
       active: map['active'] as bool,
       created: map['created'] as Timestamp,
       business: BusinessDetails.fromMap(map['business'] as Map<String,dynamic>),
+      variants: List<ProductVariant>.from((map['variants'] as List<int>).map<ProductVariant>((x) => ProductVariant.fromMap(x as Map<String,dynamic>),),)
     );
   }
 
