@@ -4,10 +4,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:interestelar_party/interestelar_party.dart';
 
-import 'package:interestelar_party/src/models/business/legal_data.dart';
-import 'package:interestelar_party/src/models/general/location.dart';
-import 'package:interestelar_party/src/models/general/user_details.dart';
-
 class Business {
 
   bool? active;
@@ -26,6 +22,7 @@ class Business {
   List? productsCategories;
   BusinessResource? businessResource;
   List<ProductVariant>? variants;
+  List<TableCategory>? tableCategories;
 
   Business({
     this.active,
@@ -44,6 +41,7 @@ class Business {
     this.productsCategories,
     this.businessResource,
     this.variants,
+    this.tableCategories,
   });
 
   Map<String, dynamic> toMap() {
@@ -64,6 +62,7 @@ class Business {
       'productsCategories': productsCategories,
       'businessResource' : businessResource,
       'variants': variants!.map((x) => x.toMap()).toList(),
+      'tableCategories' : tableCategories!.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -85,6 +84,7 @@ class Business {
       productsCategories: map['productsCategories'] != null ? map['productsCategories'] as List : null,
       businessResource: map['businessResource'] != null ? BusinessResource.fromMap(map['businessResource'] as Map<String,dynamic>) : null,
       variants: map['variants'] == null ? [] : map['variants'].map<ProductVariant>((e)=> ProductVariant.fromMap(e)).toList(),
+      tableCategories: map['tableCategories'] != null ? map['tableCategories'].map<TableCategory>((x)=> TableCategory.fromMap(x)).tolist() as List<TableCategory> : null,
     );
   }
 

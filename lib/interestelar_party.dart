@@ -9,3 +9,4 @@ export 'src/models/business/product.dart';
 export 'src/services/dialog_services.dart';
 export 'src/services/firestore_recover_data.dart';
 export 'src/services/upload_images.dart';
+export 'package:interestelar_party/src/models/business/table_category.dart';
