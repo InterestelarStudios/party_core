@@ -84,7 +84,7 @@ class Business {
       productsCategories: map['productsCategories'] != null ? map['productsCategories'] as List : null,
       businessResource: map['businessResource'] != null ? BusinessResource.fromMap(map['businessResource'] as Map<String,dynamic>) : null,
       variants: map['variants'] == null ? [] : map['variants'].map<ProductVariant>((e)=> ProductVariant.fromMap(e)).toList(),
-      tableCategories: map['tableCategories'] != null ? map['tableCategories'].map<TableCategory>((x)=> TableCategory.fromMap(x)).tolist() as List<TableCategory> : null,
+      tableCategories: map['tableCategories'] != null ? map['tableCategories'].map<TableCategory>((x)=> TableCategory.fromMap(x)).toList() as List<TableCategory> : null,
     );
   }
 
