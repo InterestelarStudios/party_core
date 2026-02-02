@@ -24,7 +24,7 @@ class Business {
   BusinessResource? businessResource;
   List<ProductVariant>? variants;
   List<TableCategory>? tableCategories;
-  DeliverySettings deliverySettings;
+  DeliverySettings? deliverySettings;
 
   Business({
     this.active,
@@ -44,7 +44,7 @@ class Business {
     this.businessResource,
     this.variants,
     this.tableCategories,
-    required this.deliverySettings,
+    this.deliverySettings,
   });
 
   Map<String, dynamic> toMap() {
@@ -66,7 +66,7 @@ class Business {
       'businessResource' : businessResource,
       'variants': variants!.map((x) => x.toMap()).toList(),
       'tableCategories' : tableCategories!.map((x) => x.toMap()).toList(),
-      'deliverySettings' : deliverySettings.toMap(),
+      'deliverySettings' : deliverySettings?.toMap(),
     };
   }
 
@@ -89,7 +89,7 @@ class Business {
       businessResource: map['businessResource'] != null ? BusinessResource.fromMap(map['businessResource'] as Map<String,dynamic>) : null,
       variants: map['variants'] == null ? [] : map['variants'].map<ProductVariant>((e)=> ProductVariant.fromMap(e)).toList(),
       tableCategories: map['tableCategories'] != null ? map['tableCategories'].map<TableCategory>((x)=> TableCategory.fromMap(x)).toList() as List<TableCategory> : null,
-      deliverySettings: DeliverySettings.fromMap(map['deliverySettings']),
+      deliverySettings: map['deliverySettings'] == null ? null : DeliverySettings.fromMap(map['deliverySettings']),
     );
   }
 
