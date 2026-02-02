@@ -47,6 +47,15 @@ class Business {
     this.deliverySettings,
   });
 
+  BusinessDetails toDetails(){
+    return BusinessDetails(
+      id: id!,
+      logo: logo!,
+      name: name!,
+      category: categories!.toString().replaceAll("[", "").replaceAll("]", ""),
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'active': active,
