@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:interestelar_party/interestelar_party.dart';
 
 class Business {
@@ -23,6 +24,7 @@ class Business {
   BusinessResource? businessResource;
   List<ProductVariant>? variants;
   List<TableCategory>? tableCategories;
+  DeliverySettings deliverySettings;
 
   Business({
     this.active,
@@ -42,6 +44,7 @@ class Business {
     this.businessResource,
     this.variants,
     this.tableCategories,
+    required this.deliverySettings,
   });
 
   Map<String, dynamic> toMap() {
@@ -63,6 +66,7 @@ class Business {
       'businessResource' : businessResource,
       'variants': variants!.map((x) => x.toMap()).toList(),
       'tableCategories' : tableCategories!.map((x) => x.toMap()).toList(),
+      'deliverySettings' : deliverySettings.toMap(),
     };
   }
 
@@ -85,6 +89,7 @@ class Business {
       businessResource: map['businessResource'] != null ? BusinessResource.fromMap(map['businessResource'] as Map<String,dynamic>) : null,
       variants: map['variants'] == null ? [] : map['variants'].map<ProductVariant>((e)=> ProductVariant.fromMap(e)).toList(),
       tableCategories: map['tableCategories'] != null ? map['tableCategories'].map<TableCategory>((x)=> TableCategory.fromMap(x)).toList() as List<TableCategory> : null,
+      deliverySettings: DeliverySettings.fromMap(map['deliverySettings']),
     );
   }
 
@@ -170,4 +175,34 @@ class BusinessDetails {
   String toJson() => json.encode(toMap());
 
   factory BusinessDetails.fromJson(String source) => BusinessDetails.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class DeliverySettings {
+
+  num limitRadius;
+  num kmPrice;
+
+  DeliverySettings({
+    required this.limitRadius,
+    required this.kmPrice,
+  });
+
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'limitRadius': limitRadius,
+      'kmPrice': kmPrice,
+    };
+  }
+
+  factory DeliverySettings.fromMap(Map<String, dynamic> map) {
+    return DeliverySettings(
+      limitRadius: map['limitRadius'] as num,
+      kmPrice: map['kmPrice'] as num,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory DeliverySettings.fromJson(String source) => DeliverySettings.fromMap(json.decode(source) as Map<String, dynamic>);
 }
