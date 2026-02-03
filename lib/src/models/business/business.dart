@@ -25,6 +25,8 @@ class Business {
   List<ProductVariant>? variants;
   List<TableCategory>? tableCategories;
   DeliverySettings? deliverySettings;
+  Availability? availability;
+  String? session;
 
   Business({
     this.active,
@@ -45,6 +47,8 @@ class Business {
     this.variants,
     this.tableCategories,
     this.deliverySettings,
+    this.availability,
+    this.session
   });
 
   BusinessDetails toDetails(){
@@ -76,6 +80,8 @@ class Business {
       'variants': variants!.map((x) => x.toMap()).toList(),
       'tableCategories' : tableCategories!.map((x) => x.toMap()).toList(),
       'deliverySettings' : deliverySettings?.toMap(),
+      'availability' : availability?.toMap(),
+      'session' : session,
     };
   }
 
@@ -99,6 +105,8 @@ class Business {
       variants: map['variants'] == null ? [] : map['variants'].map<ProductVariant>((e)=> ProductVariant.fromMap(e)).toList(),
       tableCategories: map['tableCategories'] != null ? map['tableCategories'].map<TableCategory>((x)=> TableCategory.fromMap(x)).toList() as List<TableCategory> : null,
       deliverySettings: map['deliverySettings'] == null ? null : DeliverySettings.fromMap(map['deliverySettings']),
+      availability: map['availability'] == null ? null : Availability.fromMap(map['availability']),
+      session: map['session'] != null ? map['session'] as String : null,
     );
   }
 
@@ -214,4 +222,34 @@ class DeliverySettings {
   String toJson() => json.encode(toMap());
 
   factory DeliverySettings.fromJson(String source) => DeliverySettings.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class Availability {
+
+  bool local;
+  bool delivery;
+
+  Availability({
+    required this.local,
+    required this.delivery,
+  });
+
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'local': local,
+      'delivery': delivery,
+    };
+  }
+
+  factory Availability.fromMap(Map<String, dynamic> map) {
+    return Availability(
+      local: map['local'] as bool,
+      delivery: map['delivery'] as bool,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Availability.fromJson(String source) => Availability.fromMap(json.decode(source) as Map<String, dynamic>);
 }
